@@ -98,7 +98,7 @@ if __name__ == '__main__':
             assert((chunkxUP - chunkx) <= rangex)
     
             dataset = driver.Create(
-                    "%s.out.%d.%d.tif" %(raster, j, i),
+                    "%s.out.%d.%d.tif" %(raster.split(".")[0], j, i),
                     (chunkxUP - chunkx),
                     (chunkyUP - chunky),
                     4,
@@ -113,6 +113,7 @@ if __name__ == '__main__':
                 roty,
                 pxH))
 
+            print(chunky,chunkyUP,chunkx,chunkxUP)
             dataset.GetRasterBand(1).WriteArray(bandList[0,chunky:chunkyUP,chunkx:chunkxUP])
             dataset.GetRasterBand(2).WriteArray(bandList[1,chunky:chunkyUP,chunkx:chunkxUP])
             dataset.GetRasterBand(3).WriteArray(bandList[2,chunky:chunkyUP,chunkx:chunkxUP])

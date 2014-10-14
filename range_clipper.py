@@ -68,12 +68,13 @@ if __name__ == '__main__':
         bandList.append(data)
     
     
+    print(((bot_x - top_x)*(1.0/float(pxW))),((bot_y - top_y)*(1.0/float(pxH))))
     bandList = numpy.array(bandList)
     driver = gdal.GetDriverByName('GTiff');
     dataset = driver.Create(
-            "%s.out.%d.%d.tif" %(raster, top_x, top_y),
-            (bot_x - top_x)*(1.0/pxW),
-            (bot_y - top_y)*(1.0/pxW),
+            "%s.out.%d.%d.tif" %(raster.split(".")[0], top_x, top_y),
+            int((bot_x - top_x)*(1.0/float(pxW))),
+            int((bot_y - top_y)*(1.0/float(pxH))),
             4,
             gdal.GDT_Byte,
             )
@@ -86,10 +87,18 @@ if __name__ == '__main__':
         roty,
         pxH))
 
-    dataset.GetRasterBand(1).WriteArray(bandList[0,top_x*(1/pxW):bot_x*(1/pxW),top_y*(1/pxH):bot_y*(1/pxH)])
-    dataset.GetRasterBand(2).WriteArray(bandList[1,top_x*(1/pxW):bot_x*(1/pxW),top_y*(1/pxH):bot_y*(1/pxH)])
-    dataset.GetRasterBand(3).WriteArray(bandList[2,top_x*(1/pxW):bot_x*(1/pxW),top_y*(1/pxH):bot_y*(1/pxH)])
-    dataset.GetRasterBand(4).WriteArray(bandList[3,top_x*(1/pxW):bot_x*(1/pxW),top_y*(1/pxH):bot_y*(1/pxH)])
+    
+    tx = int((top_x - xOrg)*(1.0/pxW))
+    ty = int((top_y - yOrg)*(1.0/pxH))
+    bx = int((bot_x - xOrg)*(1.0/pxW))
+    by = int((bot_y - yOrg)*(1.0/pxH))
+
+    print(ty, by, tx,bx)
+
+    dataset.GetRasterBand(1).WriteArray(bandList[0,ty:by,tx:bx])
+    dataset.GetRasterBand(2).WriteArray(bandList[1,ty:by,tx:bx])
+    dataset.GetRasterBand(3).WriteArray(bandList[2,ty:by,tx:bx])
+    dataset.GetRasterBand(4).WriteArray(bandList[3,ty:by,tx:bx])
 
     dataset.SetProjection(proj)
     
