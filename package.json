@@ -1,0 +1,27 @@
+{
+  "name": "geo-clipper",
+  "version": "1.0.0",
+  "description": "tiling server for clipping images",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Snkz/geo-clipper.git"
+  },
+  "keywords": [
+    "leaflet",
+    "tile",
+    "geotiff",
+    "gdal",
+    "image",
+    "clip"
+  ],
+  "author": "Abdi Dahir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Snkz/geo-clipper/issues"
+  },
+  "homepage": "https://github.com/Snkz/geo-clipper"
+}
