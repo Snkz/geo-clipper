@@ -73,8 +73,8 @@ if __name__ == '__main__':
     driver = gdal.GetDriverByName('GTiff');
     dataset = driver.Create(
             "%s.out.%d.%d.tif" %(raster.split(".")[0], top_x, top_y),
-            int((bot_x - top_x)*(1.0/float(pxW))),
-            int((bot_y - top_y)*(1.0/float(pxH))),
+            int((bot_x - top_x)*(1.0/float(pxW))) + 1,
+            int((bot_y - top_y)*(1.0/float(pxH))) + 1,
             4,
             gdal.GDT_Byte,
             )
